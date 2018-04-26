@@ -1,0 +1,127 @@
+<div><h2><span class="red">Ledig</span> 
+        |<span class="blue">&nbsp;Mindre &auml;n en m&aring;nad kvar</span> |
+        <span class="green"> Vill byta</span>
+</h2></div>
+  <!--class="hidden-xs"-->
+<div class="maincontent">
+        <!--% include consultslnfolist.ejs %-->
+  <% var itemsleft= [], itemslast=[];
+    var showstripe=false;
+
+    consultsinfo.forEach(function(item) { 
+      var antaldagarkvar =item.getTimeLeft();
+      if (antaldagarkvar !=null && antaldagarkvar<=31 && antaldagarkvar>0) 
+      {
+        itemsleft.push(item);
+        return;
+      }
+      else if (antaldagarkvar !=null && item.change !=undefined && item.change =="TRUE"){
+          itemslast.push(item);
+          return;
+      } 
+      else if (antaldagarkvar !=null && antaldagarkvar <=0){ %>
+
+    <article class="consult-item redborder">
+        <h3 class="consult-name red">
+
+        <%= item.name %></h3>
+        <p class="consult-info">
+            <!--a href="/consults/<%= item.name %>"></a>
+
+                <img class="consultslist-img img-responsive pull-left" src="/images/consults/<%= item.name %>.jpg" alt="Photo of <%= item.name %>"-->
+        <% if ((item.end == undefined || item.end ==null ||  item.end =="") && antaldagarkvar<=0 ){ %>
+            Väntar på uppdrag<br/>
+        
+        <% } else if(item.customer == undefined || item.customer ==null ||  item.customer =="") { %> 
+          <span class="bold">Startdatum:</span>  <%= item.start %> <br/>
+
+        <%}else{ %>
+          <span class="bold">Kund:</span> <%= item.customer %> till  <%= item.end %> <br/>
+
+        <%} %>
+        
+        <span class="bold">Antal dagar: </span><%= antaldagarkvar %><br/>
+        <span class="bold">Område: </span><%= item.expertiees %><br/>
+        </p>
+    </article><!-- article consultslist-->
+   <% showstripe=true; }
+  }); if (itemsleft.length>0 && showstripe){ %>
+  <div class="stripe hidden-xs"><br>
+      <br>&nbsp; | &nbsp;<br>&nbsp; | <br>&nbsp; | <br>&nbsp; | <br>&nbsp; | 
+  </div>
+  <!--% include consultslnfolist.ejs %-->
+    <% } showstripe=false;
+    itemsleft.forEach(function(item) { %>
+    <article class="consult-item blueborder">
+        <h3 class="consult-name blue">
+        <%= item.name %>
+        </h3>
+        <p class="consult-info">
+            <!--a href="/consults/<%= item.name %>"></a>
+
+                <img class="consultslist-img img-responsive pull-left" src="/images/consults/<%= item.name %>.jpg" alt="Photo of <%= item.name %>"-->
+        <% var antaldagarkvar =item.getTimeLeft()
+        if (item.end==undefined || item.end == null || item.end=="" ){ %>
+          <span class="bold">Nyanst&auml;lld start: </span>  <%= item.start %> <br/>
+
+        <% }else if ( item.customer == undefined || item.customer ==null ||  item.customer ==""){ %>
+            Ingen kundinfo<br/>
+
+        <% } else { %> 
+        <span class="bold">Kund:</span> <%= item.customer %> till  <%= item.end %> <br/>
+        <% } %>
+
+        <span class="bold">Dagar kvar: </span><%= antaldagarkvar %><br/>
+        <span class="bold">Område: </span><%= item.expertiees %><br/>
+        </p>
+    </article><!-- article consultslist-->
+  <% showstripe=true; }); 
+  if (itemslast.length>0 &&showstripe==true){ %>
+  <div class="stripe hidden-xs"><br>
+    <br>&nbsp; | &nbsp;<br>&nbsp; | <br>&nbsp; | <br>&nbsp; | <br>&nbsp; | 
+      </div>
+      <!--% include consultslnfolist.ejs %-->
+      <% }showstripe=false;
+      itemslast.forEach(function(item) { %>
+        <article class="consult-item greenborder">
+            <h3 class="consult-name green">
+            <%= item.name %></h3>
+            <p class="consult-info">
+                <!--a href="/consults/<%= item.name %>"></a>
+    
+                    <img class="consultslist-img img-responsive pull-left" src="/images/consults/<%= item.name %>.jpg" alt="Photo of <%= item.name %>"-->
+            <% var antaldagarkvar =item.getTimeLeft()
+            
+            if ( item.customer == undefined || item.customer ==null ||  item.customer ==""){ %>
+                Ingen kundinfo<br/>
+            <% } else { %> 
+            <span class="bold">Kund:</span> <%= item.customer %> till  <%= item.end %> <br/>
+            <% }  %>
+            <span class="bold">Vill byta </span><br/>
+            <span class="bold">Område: </span><%= item.expertiees %><br/>
+            </p>
+        </article><!-- article consultslist-->
+      <% }); %>
+    
+        
+           
+    <!--article class="article">
+      <h1 class="article-title">Who are we?</h1>
+        <p>Text</p>
+    </article><!-- article -->
+  
+    <!--article class="article">
+      <h1 class="article-title">Get Busy!</h1>
+      <p>Text <a href="http://www.meetup.com/rouxmeet">join our meetup group</a>, <a href="http://www.twitter.com/rouxmeet">follow us on twitter</a>. If you're in FaceBook, you can also <a href="http://www.facebook.com/rouxmeet">join our FaceBook group</a>.</p>
+    </article><!-- article -->
+  
+    <!--article class="article">
+      <h1 class="article-title">Who should come?</h1>
+      <ul>
+        <li>Anybody interested in art and the creative industry</li>
+        <li>Painters, sculptors, photographers and graphic artists</li>
+        <li>Those interested in meeting and making a connection with others in the local art scene.</li>
+      </ul>
+    </article><!-- article -->
+  </div>
+  <script src="/reload/reload.js"></script>

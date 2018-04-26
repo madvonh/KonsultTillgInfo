@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,700,900|Lato|Open+Sans|Roboto');
+
+/*font-family: 'Roboto', sans-serif;
+font-family: 'Fira Sans', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Lato', sans-serif;
+font-family: 'Montserrat', sans-serif;*/
+
+:root {
+  --red: #a53e23;
+  --blue: #3282af;
+  --green: #637a23;
+  --grey:  rgb(43, 43, 43);
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+h1 {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: Black;
+  color: Black;
+  margin: 0;
+  padding: 47px 0;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: Regular;
+  color: var(--gray);
+}
+
+h2 {
+  font-style: italic;
+  font-size: 0.8em;
+  padding: 0 0 10px 10px;
+  margin-bottom: 0;
+}
+.red{
+  color: var(--red);
+}
+.blue{
+  color: var(--blue);
+}
+.green{
+  color: var(--green);
+}
+
+.redborder{
+  border-color: var(--red);
+}
+
+.blueborder{
+  border-color: var(--blue);
+}
+
+.greenborder{
+  border-color: var(--green);
+}
+p {
+
+  font-family: 'Roboto', sans-serif;
+}
+
+li {
+  font-family: inherit;
+}
+
+a {
+  color: var(--red);
+}
+
+header {
+  font-size: 1.3rem;
+}
+
+header .jumbotron {
+  height: 105px;
+  margin-bottom: 20px;
+  text-align: center;
+  /**background: url(../images/webstep_wallpaper_0005_red.jpg) no-repeat 50% 50%;**/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: var(--white);
+  width: 100%;
+  border-bottom: 3px dotted var(--red)
+}
+.bild {
+  padding: 5px 0 0 5px;
+  margin: 0;
+}
+.stripe{
+  font-family: 'FiraSSans', sans-serif;
+  color: var(--gray);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.maincontent {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  line-height: 100%;
+}
+
+.consult-item {
+  font-size: .85rem;
+  line-height: 100%;
+  border-width: 3px;
+  border-style: dotted;
+  min-width: 170px;
+  max-width: 200px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.consult-name{
+  font-size: 1em;
+}
+
+.consult-info{
+  font-size: .8em;
+}
+.bold {
+  font-weight: bold;
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .pixgrid img {
+    width: 20%;
+  }
+}
+
+@media (max-width: 500px) {
+  .hidden-xs{
+    display: none;
+  }
+  .outer-wrap {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .maincontent{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+    max-width: 350px;
+ }
+}
+
+
+@media (min-width: 500px) {
+  .outer-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+  }
+  .jumbotron {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  h2 {
+    font-size: 1em;
+  }
+
+  .maincontent{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+ }
+
+  .consult-item {
+    font-size: 1rem;
+    line-height: 120%;
+    padding: 0 10px;
+    margin: 10px;
+    min-width: 200px;
+  }
+
+  .consult-name{
+    font-size: 1em;
+  }
+
+  .consult-info{
+    font-size: .8em;
+  }
+}
+
+/*.sidebar {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+  line-height: 130%;
+}
+
+.sidebar .sidebar-title {
+  font-size: 1.5em;
+}
+
+.sidebar .sidebar-body li {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    line-height: 160%;
+  }
+  .sidebar .sidebar-title {
+    font-size: 2em;
+  }
+}
+
+
+
+#consult .consultslist-img {
+  margin-right: 20px;
+}
+
+
+
+#home .consult-title {
+  font-size: 1.5em;
+}
+
+#consultDetail .consult-title {
+  font-size: 2.4em;
+}
+
+#consultDetail .consult-img {
+  margin: 20px 0;
+}
+*/
+
+
+/**  pixgrid **/
+/*
+.pixgrid {
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.pixgrid img {
+  display: block;
+  padding: 5px;
+  float: left;
+  width: 33.33%;
+  border-radius: 10px;
+}
+*/
+
+  /* .header_content{
+
+   display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+ 
+  }
+  .bild {
+    flex: 1 1 100px;
+    order: 0; 
+
+  }
+  .jumbotron{
+    flex: 1 0 500px;
+    order: 1; 
+  }*/
