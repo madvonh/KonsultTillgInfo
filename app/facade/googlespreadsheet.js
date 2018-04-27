@@ -61,7 +61,7 @@ function getNewToken(oAuth2Client, callback) {
         if (err) console.error(err);
         console.log('Token stored to', TOKEN_PATH);
       });
-      listConsults(auth,callback);
+      listConsults(oAuth2Client,callback);
     });
   });
 }
