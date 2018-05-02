@@ -128,7 +128,9 @@ header .jumbotron {
 .bold {
   font-weight: bold;
 }
-
+.hidden {
+  display: none;
+}
 @media (min-width: 500px) and (max-width: 768px) {
   .pixgrid img {
     width: 20%;

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head><% include partials/template/head.ejs %></head>
+  <head><% include partials/template/head.ejs %><meta name="google-signin-client_id" content="780872700962-9j3t89fn0udijkijb12p2pvgt22di7n8.apps.googleusercontent.com">
+  </head>
   <body>
-      <div class="outer-wrap">
+      <div id="outer-wrap"  class="outer-wrap">
     <% include partials/template/header.ejs %>
     <div class="container">
       <section> 
@@ -14,7 +15,175 @@
       </div>
     </div><!-- container -->
   </div><!-- outer-wrap -->
-</script>
   </body>
-</html>
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyBb9w2J5JwlXyIuDGhX60x49GfWhFv2aSI",
+      authDomain: "konsultplanering.firebaseapp.com",
+      databaseURL: "https://konsultplanering.firebaseio.com",
+      projectId: "konsultplanering",
+      storageBucket: "konsultplanering.appspot.com",
+      messagingSenderId: "828059772857" 
+    };
+    firebase.initializeApp(config);
+   
+  //clientId  780872700962-9j3t89fn0udijkijb12p2pvgt22di7n8.apps.googleusercontent.com
+//client secret: kUoj_6wWxmHM1u_z0AJsvYaf
+/* function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+} */
+ function login () {
+  function newLoginHappend(user){
+
+      if (user) {
+       // unsubscribe();
+        app(user);
+      }
+       else {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().useDeviceLanguage();
+        provider.addScope('https://www.googleapis.com/auth/plus.login');
+         provider.addScope('https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly');
+        firebase.auth().signInWithRedirect(provider);
+  }}
+  //var unsubscribe =firebase.auth().onAuthStateChanged(newLoginHappend);
+   firebase.auth().onAuthStateChanged(newLoginHappend);
+}
+
+function app(user) {
+  console.log(user);
+  firebase.auth().getRedirectResult().then(function(result) {
+      if (result.credential&& result.additionalUserInfo.profile.hd=="webstep.se") {
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // ...
+        console.log(result);
+        var client = new HttpClient();
+        var url = 'https://www.googleapis.com/admin/directory/v1/customer/my_customer/roles/ALL/privileges?access_token=' +token;
+        // url = 'https://www.googleapis.com/admin/directory/v1/customers/my_customer?access_token=' +token;
+        
+        client.get(url, function(response) {
+        // do something with response
+        console.log(response);
+      });
+    }
+             //firebase.auth().signOut();
+            //window.location.replace("http://stackoverflow.com");
+      //firebase.auth().signOut();
+  // The signed-in user info.
+  //var user = result.user;
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+  });
+}
+  // ...
+  //var id_token = googleUser.getAuthResponse().id_token// Build Firebase credential with the Google ID token.
+// var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
+
+// // Sign in with credential from the Google user.
+// firebase.auth().signInWithCredential(credential).catch(function(error) {
+//   // Handle Errors here.
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   // The email of the user's account used.
+//   var email = error.email;
+//   // The firebase.auth.AuthCredential type that was used.
+//   var credential = error.credential;
+//   // ...
+// });
+
+ 
+
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+        anHttpRequest.open( "GET", aUrl, true );            
+        anHttpRequest.send();
+    }
+}
+window.onload = login;
+ </script> </html>
+
+<!-- <script type="text/javascript">
+gapi.load('auth2', function() {
+     gapi.auth2.init();
+});
+        function login() 
+        {
+          var myParams = {
+            'clientid' : '780872700962-9j3t89fn0udijkijb12p2pvgt22di7n8.apps.googleusercontent.com',
+            'cookiepolicy' : 'single_host_origin',
+            'callback' : 'loginCallback',
+            'approvalprompt':'force',
+            'scope' : 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
+          };
+          gapi.auth.signIn(myParams);
+        }
+
+        function loginCallback(result)
+        {
+            if(result['status']['signed_in'])
+            {
+                var request = gapi.client.plus.people.get(
+                {
+                    'userId': 'madeleine.von.hausswolff@webstep.se'
+                });
+                request.execute(function (resp)
+                {
+                    /* console.log(resp);
+                    console.log(resp['id']); */
+              /*      var email = '';
+                    if(resp['emails'])
+                    {
+                        for(i = 0; i < resp['emails'].length; i++)
+                        {
+                            if(resp['emails'][i]['type'] == 'account')
+                            {
+                                email = resp['emails'][i]['value'];//here is required email id
+                            }
+                        }
+                    }
+                   var usersname = resp['displayName'];//required name
+                });
+            }
+        }
+        */
+/*         function onLoadCallback()
+        {
+            gapi.client.setApiKey('YOUR_API_KEY');
+            gapi.client.load('plus', 'v1',function(){});
+        }
+ */
+
+/*
+      <script type="text/javascript">
+              (function() {
+               var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+               po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+             })();
+        </script>  </script> 
+        
+
+
 
