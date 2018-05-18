@@ -57,9 +57,7 @@
         <%= item.name %>
         </h3>
         <p class="consult-info">
-            <!--a href="/consults/<%= item.name %>"></a>
-
-                <img class="consultslist-img img-responsive pull-left" src="/images/consults/<%= item.name %>.jpg" alt="Photo of <%= item.name %>"-->
+           
         <% var antaldagarkvar =item.getTimeLeft()
         if (item.end==undefined || item.end == null || item.end=="" ){ %>
           <span class="bold">Nyanst&auml;lld start: </span>  <%= item.start %> <br/>
@@ -80,16 +78,14 @@
   <div class="stripe hidden-xs"><br>
     <br>&nbsp; | &nbsp;<br>&nbsp; | <br>&nbsp; | <br>&nbsp; | <br>&nbsp; | 
       </div>
-      <!--% include consultslnfolist.ejs %-->
+
       <% }showstripe=false;
       itemslast.forEach(function(item) { %>
         <article class="consult-item greenborder">
             <h3 class="consult-name green">
             <%= item.name %></h3>
             <p class="consult-info">
-                <!--a href="/consults/<%= item.name %>"></a>
-    
-                    <img class="consultslist-img img-responsive pull-left" src="/images/consults/<%= item.name %>.jpg" alt="Photo of <%= item.name %>"-->
+          
             <% var antaldagarkvar =item.getTimeLeft()
             
             if ( item.customer == undefined || item.customer ==null ||  item.customer ==""){ %>
@@ -101,27 +97,10 @@
             <span class="bold">Område: </span><%= item.expertiees %><br/>
             </p>
         </article><!-- article consultslist-->
+
       <% }); %>
     
         
            
-    <!--article class="article">
-      <h1 class="article-title">Who are we?</h1>
-        <p>Text</p>
-    </article><!-- article -->
-  
-    <!--article class="article">
-      <h1 class="article-title">Get Busy!</h1>
-      <p>Text <a href="http://www.meetup.com/rouxmeet">join our meetup group</a>, <a href="http://www.twitter.com/rouxmeet">follow us on twitter</a>. If you're in FaceBook, you can also <a href="http://www.facebook.com/rouxmeet">join our FaceBook group</a>.</p>
-    </article><!-- article -->
-  
-    <!--article class="article">
-      <h1 class="article-title">Who should come?</h1>
-      <ul>
-        <li>Anybody interested in art and the creative industry</li>
-        <li>Painters, sculptors, photographers and graphic artists</li>
-        <li>Those interested in meeting and making a connection with others in the local art scene.</li>
-      </ul>
-    </article><!-- article -->
   </div>
   <script src="/reload/reload.js"></script>

@@ -17,11 +17,13 @@ class consultsspreadsheet {
     while (consults.length>0)
     {
       temp =consults[consults.length-1];
+
       /*om det inte finns någon tidsangivelse ska inte consulten med i listan*/
       if (temp.getTimeLeft()==null) {
         consults.pop();
         continue;
       }
+      
       //jämför med alla och lägg sedan den med lägst värde i den sorterade listan
       var position = consults.length-1;
       var count = 0;

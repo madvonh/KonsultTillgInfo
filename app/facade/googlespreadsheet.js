@@ -74,7 +74,7 @@ function getNewToken(oAuth2Client, callback) {
 function listConsults(auth,callbackdata) {
   const sheets = google.sheets({version: 'v4', auth});
   sheets.spreadsheets.values.get({
-    spreadsheetId: '1u8EM1vf2jVdim2a-mXJI6VG_vM07ZtH2yS0lHt5stjI',
+    spreadsheetId: '1OOVq0PVAicwwCKCuVo_flnu1LEaVX8VF0bwjE8K8Zw8',//'1u8EM1vf2jVdim2a-mXJI6VG_vM07ZtH2yS0lHt5stjI',
     range: 'Konsulter!A2:G',
   }, (err, {data}) => {
     if (err) return console.log('The API returned an error: ' + err);
@@ -82,25 +82,32 @@ function listConsults(auth,callbackdata) {
     
     /*create an object and return  */
     if (rows.length) {
-      console.log(JSON.stringify(rows, null, 2));
       var consults= [];
       rows.forEach(function(item) {
-        var cons = new consultsspreadsheet(item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7]);
-        console.log(cons.name);
-        consults.push(cons);
+                                           
+        if (item[6]==='FALSE'||item[6]==='TRUE'){
+                                              //name, customer, start, end, extent, expertiees, change
+            if (item[3]==='' && item[4]===''){
 
-        /*pagePhotos = pagePhotos.concat(item.artwork);*/
+              consults.push(new consultsspreadsheet(item[0],item[1], item[5],item[4],null,item[2],item[6]));
+            }
+            else
+            {
+              if (item[4]!=="" && item[4]!=='Löpande')
+              {
+                consults.push(new consultsspreadsheet(item[0],item[1],item[3],item[4],null,item[2],item[6]));
+              }
+            }
+          
+        }
+       
+        //console.log(cons.name);
+        
       });
       
       var consultsSorted = consultsspreadsheet.Sort(consults);
 
-      /*callbackdata(JSON.stringify(consults, '-', 2));*/
       callbackdata(consultsSorted);
-
-
-     /* rows.map((row) => {
-        new consultsspreadsheet(`${row[0]},${row[1]},${row[2]},${row[3]},${row[4]},${row[5]}`);
-      })*/
     } else {
       console.log('No data found.');
     }

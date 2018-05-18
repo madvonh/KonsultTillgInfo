@@ -6,14 +6,14 @@ router.get('/', function(req, res) {
   getConsults = require('../facade/googlespreadsheet');
   getConsults (function (result) {
     var cons = result;
-   // console.log(cons);
-    // process the async result
+
+    var users =[];
+    users.push('madeleine.von.hausswolff@webstep.se')
+
     res.render('index', {
       pageTitle: 'Konsulter',
-      consultsinfo: cons
-    /*artwork: pagePhotos,
-      speakers: pageSpeakers,
-      pageID: 'home'*/
+      consultsinfo: cons,
+      authorized: users
     });
   });
 });
