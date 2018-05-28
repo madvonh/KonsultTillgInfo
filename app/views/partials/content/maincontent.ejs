@@ -1,106 +1,62 @@
-<div><h2><span class="red">Ledig</span> 
-        |<span class="blue">&nbsp;Mindre &auml;n en m&aring;nad kvar</span> |
-        <span class="green"> Vill byta</span>
-</h2></div>
-  <!--class="hidden-xs"-->
-<div class="maincontent">
-        <!--% include consultslnfolist.ejs %-->
-  <% var itemsleft= [], itemslast=[];
-    var showstripe=false;
+<!--<div class="d-flex justify-content-center" style="margin-left: -86px; margin-right: -86px; background: #343a40">-->
+    <!--<p class="c-h-item red">Ledig</p>-->
+    <!--<p class="c-h-item blue">Mindre &auml;n en m&aring;nad kvar</p>-->
+    <!--<p class="c-h-item green">Vill byta</p>-->
+<!--</div>-->
 
-    consultsinfo.forEach(function(item) { 
-      var antaldagarkvar =item.getTimeLeft();
-      if (antaldagarkvar !=null && antaldagarkvar<=31 && antaldagarkvar>0) 
-      {
-        itemsleft.push(item);
-        return;
-      }
-      else if (antaldagarkvar !=null && item.change !=undefined && item.change =="TRUE"){
-          itemslast.push(item);
-          return;
-      } 
-      else if (antaldagarkvar !=null && antaldagarkvar <=0){ %>
+<div class="d-flex justify-content-center fixed-bottom" style="background: #343a40">
+    <p class="c-h-item red">Ledig</p>
+    <p class="c-h-item blue">Mindre &auml;n en m&aring;nad kvar</p>
+    <p class="c-h-item green">Vill byta</p>
+</div>
 
-    <article class="consult-item redborder">
-        <h3 class="consult-name red">
+<div class="d-flex flex-wrap">
+    <%
+    consultsinfo.forEach(function (item) {
+        var antaldagarkvar = item.getTimeLeft();
+        var color;
+        if (antaldagarkvar != null && antaldagarkvar <= 31 && antaldagarkvar > 0) {
+            color = 'c-item-blue'
+        } else if (antaldagarkvar != null && item.change != undefined && item.change == "TRUE") {
+            color = 'c-item-green'
+        } else if (antaldagarkvar != null && antaldagarkvar <= 0) {
+            color = 'c-item-red';
+        }
 
-        <%= item.name %></h3>
-        <p class="consult-info">
-            <!--a href="/consults/<%= item.name %>"></a>
+    if (color) {
+        var customerTitle;
+        var customerText;
+        if ((item.end == undefined || item.end == null || item.end == "") && antaldagarkvar <= 0) {
+            customerText = 'Väntar på uppdrag';
+        } else if (item.customer == undefined || item.customer == null || item.customer == "") {
+            customerTitle = 'Kund:'
+            customerText = '-:'
+        } else {
+            customerTitle = 'Kund:';
+            customerText = item.customer;
+        }
+    %>
+    <div class="card c-item <%= color %>">
+        <div class="card-header">
+            <%= item.name %>
+        </div>
+        <div class="card-body">
+            <% if ((item.end == undefined || item.end == null || item.end == "") && antaldagarkvar <= 0 ){ %>
+            <p style="margin-bottom: 0">Väntar på uppdrag</p>
+            <% } else if(item.customer == undefined || item.customer == null || item.customer == "") { %>
+            <p style="margin-bottom: 0"><b>Kund:</b> -</p>
+            <p style="margin-bottom: 0"><b>Uppdrag slutar:</b> <%= item.end %></p>
+            <% }else{ %>
+            <p style="margin-bottom: 0"><b>Kund:</b> <%= item.customer %></p>
+            <p style="margin-bottom: 0"><b>Uppdrag slutar:</b> <%= item.end %></p>
+            <% } %>
+            <p style="margin-bottom: 0"><b>Antal dagar:</b> <%= antaldagarkvar %></p>
+            <p style="margin-bottom: 0"><b>Område:</b> <%= item.expertiees %></p>
+        </div>
+    </div>
+    <% }
+    });
+    %>
+</div>
 
-                <img class="consultslist-img img-responsive pull-left" src="/images/consults/<%= item.name %>.jpg" alt="Photo of <%= item.name %>"-->
-        <% if ((item.end == undefined || item.end ==null ||  item.end =="") && antaldagarkvar<=0 ){ %>
-            Väntar på uppdrag<br/>
-        
-        <% } else if(item.customer == undefined || item.customer ==null ||  item.customer =="") { %> 
-          <span class="bold">Startdatum:</span>  <%= item.start %> <br/>
-
-        <%}else{ %>
-          <span class="bold">Kund:</span> <%= item.customer %> till  <%= item.end %> <br/>
-
-        <%} %>
-        
-        <span class="bold">Antal dagar: </span><%= antaldagarkvar %><br/>
-        <span class="bold">Område: </span><%= item.expertiees %><br/>
-        </p>
-    </article><!-- article consultslist-->
-   <% showstripe=true; }
-  }); if (itemsleft.length>0 && showstripe){ %>
-  <div class="stripe hidden-xs"><br>
-      <br>&nbsp; | &nbsp;<br>&nbsp; | <br>&nbsp; | <br>&nbsp; | <br>&nbsp; | 
-  </div>
-  <!--% include consultslnfolist.ejs %-->
-    <% } showstripe=false;
-    itemsleft.forEach(function(item) { %>
-    <article class="consult-item blueborder">
-        <h3 class="consult-name blue">
-        <%= item.name %>
-        </h3>
-        <p class="consult-info">
-           
-        <% var antaldagarkvar =item.getTimeLeft()
-        if (item.end==undefined || item.end == null || item.end=="" ){ %>
-          <span class="bold">Nyanst&auml;lld start: </span>  <%= item.start %> <br/>
-
-        <% }else if ( item.customer == undefined || item.customer ==null ||  item.customer ==""){ %>
-            Ingen kundinfo<br/>
-
-        <% } else { %> 
-        <span class="bold">Kund:</span> <%= item.customer %> till  <%= item.end %> <br/>
-        <% } %>
-
-        <span class="bold">Dagar kvar: </span><%= antaldagarkvar %><br/>
-        <span class="bold">Område: </span><%= item.expertiees %><br/>
-        </p>
-    </article><!-- article consultslist-->
-  <% showstripe=true; }); 
-  if (itemslast.length>0 &&showstripe==true){ %>
-  <div class="stripe hidden-xs"><br>
-    <br>&nbsp; | &nbsp;<br>&nbsp; | <br>&nbsp; | <br>&nbsp; | <br>&nbsp; | 
-      </div>
-
-      <% }showstripe=false;
-      itemslast.forEach(function(item) { %>
-        <article class="consult-item greenborder">
-            <h3 class="consult-name green">
-            <%= item.name %></h3>
-            <p class="consult-info">
-          
-            <% var antaldagarkvar =item.getTimeLeft()
-            
-            if ( item.customer == undefined || item.customer ==null ||  item.customer ==""){ %>
-                Ingen kundinfo<br/>
-            <% } else { %> 
-            <span class="bold">Kund:</span> <%= item.customer %> till  <%= item.end %> <br/>
-            <% }  %>
-            <span class="bold">Vill byta </span><br/>
-            <span class="bold">Område: </span><%= item.expertiees %><br/>
-            </p>
-        </article><!-- article consultslist-->
-
-      <% }); %>
-    
-        
-           
-  </div>
-  <script src="/reload/reload.js"></script>
+<script src="/reload/reload.js"></script>

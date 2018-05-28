@@ -104,3 +104,5 @@ Foodplanner/wwwroot/lib/bootstrap/*
 Foodplanner/wwwroot/lib/jquery/*
 Foodplanner/node_modules/*
 /FoodPlanner.Data/FoodPlanner.Data.csproj.user
+
+.idea/*

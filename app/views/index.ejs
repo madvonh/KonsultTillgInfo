@@ -1,41 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head><% include partials/template/head.ejs %>
-    <meta name="google-signin-client_id" content="828059772857-lte3uokmdlimivcl7io7cp4vo6qe8bu6.apps.googleusercontent.com">
-    <meta name="google-signin-cookiepolicy" content="single_host_origin">
-    <meta name="google-signin-scope" content="profile email">
-  
-  </head>
-  <body>
-      <div id="outer-wrap"  class="outer-wrap">
+<head>
+    <% include partials/template/head.ejs %>
+</head>
+<body>
+<div id="outer-wrap" class="outer-wrap">
     <% include partials/template/header.ejs %>
 
+
     <div class="container">
-      <section> 
-        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-        <% include partials/content/maincontent.ejs %>
-      </section> 
-      </div><!-- primary -->
-        <!--aside>
-        </aside--><!-- secondary -->
-      </div>
-    </div><!-- container -->
-  </div><!-- outer-wrap -->
-  </body>
-
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-    apiKey: "AIzaSyBb9w2J5JwlXyIuDGhX60x49GfWhFv2aSI",
-      authDomain: "konsultplanering.firebaseapp.com",
-      databaseURL: "https://konsultplanering.firebaseio.com",
-      projectId: "konsultplanering",
-      storageBucket: "konsultplanering.appspot.com",
-      messagingSenderId: "828059772857" 
-    };
-    firebase.initializeApp(config);
-    </script>
-    </html>
+        <section>
+            <% include partials/content/maincontent.ejs %>
+        </section>
+    </div>
+</div>
+<script>
+    function signOut() {
+        const form = document.createElement("form");
+        form.setAttribute("method", 'post');
+        form.setAttribute("action", '/logout');
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+</body>
+</html>
