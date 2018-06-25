@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <% include partials/template/head.ejs %>
+    <link rel='stylesheet' href='/css/admin.css'/>
+</head>
+<body>
+<% include partials/template/header.ejs %>
+<div class="container">
+    <div class="row admin-block">
+        <div class="col-12">
+            <p class="admin-block-header">Users</p>
+        </div>
+        <div class="col-12 table-responsive">
+            <table class="table table-striped admin-block-table">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <% users.forEach(function (item) { %>
+                <div>
+                    <tr>
+                        <th><%= item.displayName %></th>
+                        <th><%= item.email %></th>
+                        <td>
+                            <form  class="admin-block-body-select-form" action="/admin/role" method="post">
+                                <input name="userId" value="<%= item.uid %>" type="hidden">
+                                <% var selectAdmin = item.customClaims && item.customClaims.role === 'admin' ? 'selected' : '' %>
+                                <select class="form-control form-control-sm" name="role" onchange="this.form.submit()">
+                                    <option value="user">User</option>
+                                    <option value="admin" <%=selectAdmin %>>Admin</option>
+                                </select>
+                                <!--<button type="submit" class="btn btn-sm btn-warning">Revoke admin rights</button>-->
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/admin/delete" method="post">
+                                <input name="userId" value="<%= item.uid %>" type="hidden">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </div>
+
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row admin-block">
+        <div class="col-12">
+            <p class="admin-block-header">Create user</p>
+        </div>
+        <div class="col-12">
+            <form action="/admin/create" method="post">
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <label for="name" class="sr-only">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Name" name="displayName">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

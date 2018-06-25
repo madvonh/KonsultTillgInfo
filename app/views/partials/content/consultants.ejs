@@ -1,0 +1,44 @@
+<div class="d-flex flex-wrap mb-5">
+    <%
+    consultants.forEach(function (item) {
+        var timeLeft = item.getTimeLeft();
+        var color;
+
+        if (item.reason === 'ends') {
+            color = 'c-card-blue'
+        } else if (item.reason === 'change') {
+            color = 'c-card-green'
+        } else if (item.reason === 'unassigned') {
+            color = 'c-card-red';
+        }
+
+
+
+    if (color) { %>
+    <div class="card c-card <%= color %>">
+        <div class="card-header">
+            <%= item.name %>
+        </div>
+        <div class="card-body">
+            <% if ((item.end == undefined || item.end == null || item.end == "") && timeLeft <= 0 ){ %>
+            <p class="c-card-text">Väntar på uppdrag</p>
+            <% } else if(item.customer == undefined || item.customer == null || item.customer == "") { %>
+            <p class="c-card-text"><b>Kund:</b> -</p>
+            <p class="c-card-text"><b>Uppdrag slutar:</b> <%= item.end %></p>
+            <% }else{ %>
+            <p class="c-card-text"><b>Kund:</b> <%= item.customer %></p>
+            <p class="c-card-text"><b>Uppdrag slutar:</b> <%= item.end %></p>
+            <% } %>
+            <p class="c-card-text"><b>Antal dagar:</b> <%= timeLeft %></p>
+            <p class="c-card-text"><b>Område:</b> <%= item.expertiees %></p>
+        </div>
+    </div>
+    <% }
+    });
+    %>
+</div>
+<div class="d-flex justify-content-center fixed-bottom c-footer">
+    <p class="c-footer-item color-red">Ledig</p>
+    <p class="c-footer-item color-blue">Mindre &auml;n en m&aring;nad kvar</p>
+    <p class="c-footer-item color-green">Vill byta</p>
+</div>

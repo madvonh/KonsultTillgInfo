@@ -1,27 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <% include partials/template/head.ejs %>
+    <meta http-equiv="refresh" content="900" >
 </head>
 <body>
 <div id="outer-wrap" class="outer-wrap">
     <% include partials/template/header.ejs %>
 
-
-    <div class="container">
+    <div class="container mt-3">
         <section>
-            <% include partials/content/maincontent.ejs %>
+            <% if (unauthorized) { %>
+            <div class="alert alert-danger alert-dismissible fade show alert-panel" role="alert">
+                <strong>Unauthorized!</strong> Unable to access the requested resource.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <% } %>
+            <% include partials/content/consultants.ejs %>
         </section>
     </div>
 </div>
-<script>
-    function signOut() {
-        const form = document.createElement("form");
-        form.setAttribute("method", 'post');
-        form.setAttribute("action", '/logout');
-        document.body.appendChild(form);
-        form.submit();
-    }
-</script>
 </body>
 </html>

@@ -106,3 +106,7 @@ Foodplanner/node_modules/*
 /FoodPlanner.Data/FoodPlanner.Data.csproj.user
 
 .idea/*
+/firebase
+client_secret.json
+credentials.json
+/app/resources/secrets/*

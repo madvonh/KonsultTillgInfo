@@ -1,0 +1,23 @@
+{
+	"name": "functions",
+	"description": "Cloud Functions for Firebase",
+	"scripts": {
+		"lint": "eslint ."
+	},
+	"dependencies": {
+		"body-parser": "^1.18.3",
+		"consolidate": "^0.15.1",
+		"cookie-parser": "^1.4.3",
+		"ejs": "^2.5.8",
+		"express": "^4.16.3",
+		"firebase": "^5.0.3",
+		"firebase-admin": "^5.12.1",
+		"firebase-functions": "^1.0.2",
+		"google-auth-library": "^1.4.0",
+		"googleapis": "^27.0.0"
+	},
+	"devDependencies": {
+		"eslint": "^4.19.1"
+	},
+	"private": true
+}

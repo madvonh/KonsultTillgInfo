@@ -1,27 +1,33 @@
 {
-    "name": "konsulter",
-    "version": "1.0.0",
-    "description": "Presentera konsulters tillgänglighet",
-    "main": "app/app.js",
-    "scripts": {
-        "start": "nodemon -e css,ejs,js,json --watch app"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git=https://github.com/madvonh/KonsultTillgInfo.git"
-    },
-    "auther": "Madeleine von Hausswolff",
-    "license": "MIT",
-    "dependencies": {
-        "body-parser": "^1.18.3",
-        "ejs": "^2.5.8",
-        "express": "^4.16.3",
-        "firebase": "^5.0.3",
-        "firebaseui": "^3.0.0",
-        "google-auth-library": "^1.4.0",
-        "googleapis": "^27.0.0",
-        "nodemon": "^1.17.3",
-        "reload": "^2.2.2"
-    },
-    "devDependencies": {}
+  "name": "konsulter",
+  "version": "1.0.0",
+  "description": "Presentera konsulters tillgänglighet",
+  "main": "app/app.js",
+  "scripts": {
+    "start": "nodemon -e css,ejs,js,json --watch app",
+    "lint": "eslint app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git=https://github.com/madvonh/KonsultTillgInfo.git"
+  },
+  "auther": "Madeleine von Hausswolff",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consolidate": "^0.15.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "firebase": "^5.0.3",
+    "firebase-admin": "^5.12.1",
+    "firebase-functions": "^1.0.4",
+    "google-auth-library": "^1.4.0",
+    "googleapis": "^27.0.0",
+    "nodemon": "^1.17.3",
+    "reload": "^2.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1"
+  }
 }
